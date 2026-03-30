@@ -1,13 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useQuery, keepPreviousData } from '@tanstack/react-query';
 import { getTopAnime, searchAnime } from '../api/jikan';
+import { useSearchParams } from 'react-router-dom';
 import AnimeCard from '../components/AnimeCard';
 
 const HomePage: React.FC = () => {
-  // 1. 输入框的实时值
-  const [inputValue, setInputValue] = useState(''); 
-  // 2. 真正触发请求的变量（点击搜索或回车时才更新它）
-  const [searchQuery, setSearchQuery] = useState(''); 
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const initialQuery = searchParams.get('q') || '';
+  const [inputValue, setInputValue] = useState(initialQuery); 
+  const [searchQuery, setSearchQuery] = useState(initialQuery); 
+
+  useEffect(() => {
+    if (searchQuery) {
+      setSearchParams({ q: searchQuery });
+    } else {
+      setSearchParams({}); // 清空 URL 搜索参数
+    }
+  }, [searchQuery, setSearchParams]);
 
   const { data, isLoading, isError, error, isFetching } = useQuery({
     queryKey: ['animeList', searchQuery],
