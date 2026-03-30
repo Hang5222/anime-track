@@ -5,11 +5,7 @@ const BASE_URL = 'https://api.jikan.moe/v4';
 
 // 请求热门动漫
 export const getTopAnime = async ():Promise<TopAnimeResponse> => {
-  const response = await axios.get<TopAnimeResponse>(`${BASE_URL}/top/anime`, {
-    params: {
-      limit: 10
-    }
-  }); 
+  const response = await axios.get<TopAnimeResponse>(`${BASE_URL}/top/anime`);
   return response.data;
 }
 
@@ -18,7 +14,6 @@ export const searchAnime = async (query: string): Promise<TopAnimeResponse> => {
   const response = await axios.get<TopAnimeResponse>(`${BASE_URL}/anime`, {
     params: {
       q: query,
-      limit: 10,
       sfw: true
     }
   });

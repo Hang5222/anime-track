@@ -58,7 +58,7 @@ const HomePage: React.FC = () => {
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && executeSearch()}
-              className="w-full px-5 py-3 rounded-xl border-2 border-blue-300 focus:border-blue-500 outline-none text-gray-700 shadow-sm"
+              className="w-full px-5 py-3 rounded-xl border-2 border-purple-300 focus:border-purple-500 outline-none text-gray-700 shadow-sm"
             />
             {inputValue && (
               // 删除按钮
@@ -73,7 +73,7 @@ const HomePage: React.FC = () => {
           
           <button 
             onClick={executeSearch}
-            className="px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl shadow-md transition-colors"
+            className="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-xl shadow-md transition-colors"
           >
             搜索
           </button>
@@ -81,8 +81,8 @@ const HomePage: React.FC = () => {
       </div>
 
       {/* 动态标题 */}
-      <div className="flex justify-between items-center mb-6 border-b-2 border-blue-100 pb-2">
-        <h2 className="text-2xl font-bold text-gray-800 border-l-4 border-blue-500 pl-3">
+      <div className="flex justify-between items-center mb-6 border-b-2 border-purple-100 pb-2">
+        <h2 className="text-2xl font-bold text-gray-800 border-l-4 border-purple-500 pl-3">
           {searchQuery ? `"${searchQuery}" 的搜索结果` : '🔥 本季霸权排行榜'}
         </h2>
         {/* 用 isFetching 在右上角显示一个小小的转圈，而不是清空整个页面 */}
