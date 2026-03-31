@@ -46,15 +46,15 @@ const HomePage: React.FC = () => {
     <div className="container mx-auto p-4 max-w-7xl">
       {/* 搜索框区域 (保持框架稳定，绝不消失) */}
       <div className="mb-8 flex flex-col items-center">
-        <h1 className="text-4xl font-black mb-6 text-black text-center">
-          AnimeTrack 追番指南
+        <h1 className="text-3xl lg:text-4xl font-black mb-6 text-black text-center">
+          AnimeTrack 动漫指南
         </h1>
         
         <div className="relative w-full max-w-md flex gap-2">
           <div className="relative flex-1">
             <input 
               type="text"
-              placeholder="搜索动漫 (如: Naruto)"
+              placeholder="英文名搜索 (如: Naruto)"
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && executeSearch()}
@@ -82,11 +82,11 @@ const HomePage: React.FC = () => {
 
       {/* 动态标题 */}
       <div className="flex justify-between items-center mb-6 border-b-2 border-purple-100 pb-2">
-        <h2 className="text-2xl font-bold text-gray-800 border-l-4 border-purple-500 pl-3">
-          {searchQuery ? `"${searchQuery}" 的搜索结果` : '🔥 本季霸权排行榜'}
+        <h2 className="text-sm md:text-lg lg:text-2xl font-bold text-gray-800 border-l-4 border-purple-500 pl-3">
+          {searchQuery ? `"${searchQuery}" 的搜索结果` : '🔥本季霸权排行榜'}
         </h2>
         {/* 用 isFetching 在右上角显示一个小小的转圈，而不是清空整个页面 */}
-        {isFetching && <span className="text-purple-500 animate-pulse">正在更新数据... 🔄</span>}
+        {isFetching && <span className="text-sm md:text-lg lg:text-xl text-purple-500 animate-pulse">正在更新数据... 🔄</span>}
       </div>
 
       {/* 错误状态局部渲染 */}

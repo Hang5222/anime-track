@@ -11,7 +11,7 @@ const FavoritesPage: React.FC = () => {
       <div className="flex items-center mb-8">
         <button 
           onClick={() => navigate(-1)}
-          className="mr-4 text-purple-600 hover:bg-purple-50 p-2 rounded-full transition-colors"
+          className="text-sm md:text-lg mr-4 text-purple-600 hover:bg-purple-50 p-2 rounded-full transition-colors" 
         >
           ← 返回
         </button>

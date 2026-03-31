@@ -21,7 +21,7 @@ const Navbar: React.FC = () => {
 
   // 清理网址参数
   const clearUrlParams = () => {
-    window.location.href = window.location.pathname;
+    window.location.href = window.location.origin;
   };
 
   return (
