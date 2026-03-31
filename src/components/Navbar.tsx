@@ -19,11 +19,6 @@ const Navbar: React.FC = () => {
     }`;
   };
 
-  // 清理网址参数
-  const clearUrlParams = () => {
-    window.location.href = window.location.origin;
-  };
-
   return (
     // 🌟 3. 毛玻璃吸顶特效：sticky top-0 z-50 bg-white/80 backdrop-blur-md
     <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100 shadow-sm">
@@ -32,7 +27,7 @@ const Navbar: React.FC = () => {
           
           {/* 左侧 Logo */}
           <div className="shrink-0 flex items-center">
-            <Link to="/" onClick={clearUrlParams} className="text-2xl font-black tracking-tighter text-transparent bg-clip-text bg-linear-to-r from-purple-600 to-pink-500 hover:opacity-80 transition-opacity">
+            <Link to="/" className="text-2xl font-black tracking-tighter text-transparent bg-clip-text bg-linear-to-r from-purple-600 to-pink-500 hover:opacity-80 transition-opacity">
               AnimeTrack
             </Link>
           </div>
@@ -40,7 +35,7 @@ const Navbar: React.FC = () => {
           {/* 右侧导航菜单 */}
           <nav className="flex space-x-2 sm:space-x-4">
             
-            <NavLink to="/" className={navLinkClass} end onClick={clearUrlParams}>
+            <NavLink to="/" className={navLinkClass} end>
               <FaFire className="text-lg" />
               <span className="hidden sm:block">发现</span>
             </NavLink>

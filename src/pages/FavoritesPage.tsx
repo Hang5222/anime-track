@@ -15,7 +15,7 @@ const FavoritesPage: React.FC = () => {
         >
           ← 返回
         </button>
-        <h1 className="text-3xl font-black text-gray-800">💖 我的追番列表</h1>
+        <h1 className="text-2xl md:text-3xl font-black text-gray-800">💖我的追番列表</h1> 
       </div>
 
       {favorites.length === 0 ? (

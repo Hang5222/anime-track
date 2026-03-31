@@ -27,7 +27,7 @@ const HomePage: React.FC = () => {
       return searchAnime(searchQuery);
     },
     // 优化：在请求新数据期间，保留显示旧数据，配合 isFetching 使用，避免列表闪烁变空！
-    placeholderData: keepPreviousData, 
+    placeholderData: keepPreviousData
   });
 
   // 点击搜索或按回车时执行
@@ -46,7 +46,7 @@ const HomePage: React.FC = () => {
     <div className="container mx-auto p-4 max-w-7xl">
       {/* 搜索框区域 (保持框架稳定，绝不消失) */}
       <div className="mb-8 flex flex-col items-center">
-        <h1 className="text-3xl lg:text-4xl font-black mb-6 text-black text-center">
+        <h1 className="text-2xl md:text-3xl lg:text-4xl font-black mb-6 text-black text-center">
           AnimeTrack 动漫指南
         </h1>
         
@@ -73,7 +73,9 @@ const HomePage: React.FC = () => {
           
           <button 
             onClick={executeSearch}
-            className="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white font-bold rounded-xl shadow-md transition-colors"
+            // 搜索时变灰色
+            disabled={isFetching}
+            className="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white text-lg font-bold rounded-xl shadow-md transition-colors disabled:cursor-not-allowed disabled:bg-gray-500 disabled:text-white"
           >
             搜索
           </button>

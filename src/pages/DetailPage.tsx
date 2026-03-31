@@ -36,7 +36,7 @@ const DetailPage: React.FC = () => {
   return (
     <div className="container mx-auto p-4 max-w-5xl mt-6">
       
-      {/* 🔙 返回按钮 */}
+      {/* 返回按钮 */}
       <button 
         onClick={() => navigate(-1)}
         className="mb-6 flex items-center text-purple-600 hover:text-purple-800 font-bold transition-colors"
