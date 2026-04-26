@@ -1,5 +1,8 @@
 export interface TopAnimeResponse {
   data: Anime[];
+  pagination: {
+    has_next_page: boolean;
+  }
 }
 export interface Anime {
   mal_id: number;
