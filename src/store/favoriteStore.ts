@@ -14,6 +14,7 @@ interface FavoriteState {
   isFavorite: (id: number) => boolean; // 判断是否已收藏 (方便组件调用)
 }
 
+// 自定义收藏状态管理 Hook
 export const useFavoriteStore = create<FavoriteState>()(
   persist(
     (set, get) => ({
@@ -21,7 +22,7 @@ export const useFavoriteStore = create<FavoriteState>()(
 
       // 动作：添加
       addFavorite: (anime) => set((state) => ({
-        // 把新的 anime 放到数组最前面，保留原来的 favorites
+        // 把新的 anime 放到数组最前面，保留原来状态的 favorites
         favorites: [anime, ...state.favorites]
       })),
 
@@ -37,7 +38,7 @@ export const useFavoriteStore = create<FavoriteState>()(
       }
     }),
     {
-      // 🌟 persist 的配置项
+      // persist 的配置项
       name: 'anime-favorites-storage', // 存在 LocalStorage 里的 key 叫什么名字
     }
   )

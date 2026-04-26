@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useQuery, keepPreviousData } from '@tanstack/react-query';
 import { getTopAnime, searchAnime } from '../api/jikan';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom'; // 对 URL 参数进行操作的 Hook
 import AnimeCard from '../components/AnimeCard';
 
 const HomePage: React.FC = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams(); 
 
   const initialQuery = searchParams.get('q') || '';
   const [inputValue, setInputValue] = useState(initialQuery); 
@@ -85,7 +85,7 @@ const HomePage: React.FC = () => {
       {/* 动态标题 */}
       <div className="flex justify-between items-center mb-6 border-b-2 border-purple-100 pb-2">
         <h2 className="text-sm md:text-lg lg:text-2xl font-bold text-gray-800 border-l-4 border-purple-500 pl-3">
-          {searchQuery ? `"${searchQuery}" 的搜索结果` : '🔥本季霸权排行榜'}
+          {searchQuery ? `"${searchQuery}" 的搜索结果` : '🔥热门动漫排行榜'}
         </h2>
         {/* 用 isFetching 在右上角显示一个小小的转圈，而不是清空整个页面 */}
         {isFetching && <span className="text-sm md:text-lg lg:text-xl text-purple-500 animate-pulse">正在更新数据... 🔄</span>}

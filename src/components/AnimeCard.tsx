@@ -49,6 +49,7 @@ const AnimeCard: React.FC<AnimeCardProps> = ({ anime }) => {
         <div className="absolute top-2 right-2 bg-black/70 backdrop-blur-sm text-white text-xs font-bold px-2 py-1 rounded-md flex items-center gap-1">
           ⭐ {anime.score}
         </div>
+        
         {/* 爱心收藏按钮区域 */}
         <button 
           onClick={handleHeartClick}

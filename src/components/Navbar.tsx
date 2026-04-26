@@ -51,7 +51,7 @@ const Navbar: React.FC = () => {
                   </span>
                 )}
               </div>
-              <span className="hidden sm:block ml-1">我的追番</span>
+              <span className="hidden sm:block ml-1">收藏</span>
             </NavLink>
 
             <NavLink to="/about" className={navLinkClass}>
