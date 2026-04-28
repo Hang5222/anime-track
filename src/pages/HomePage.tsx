@@ -52,8 +52,17 @@ const HomePage: React.FC = () => {
       return hasNext ? allPages.length + 1 : undefined;
     },
 
-    // 修复重回主页的429报错：数据在 5 分钟内保持新鲜，不会自动重新请求
+    // 修复重回主页的429报错：
+    // 数据在 5 分钟内保持新鲜，不会自动重新请求
     staleTime: 1000 * 60 * 5,
+    // 缓存数据在 10 分钟内保留，即使组件卸载
+    gcTime: 1000 * 60 * 10,
+    // 窗口重新聚焦时不自动刷新
+    refetchOnWindowFocus: false,
+    // 网络重连时不自动刷新
+    refetchOnReconnect: false,
+    // 组件重新挂载时不自动刷新
+    refetchOnMount: false,
   });
 
   // 雷达探测逻辑
