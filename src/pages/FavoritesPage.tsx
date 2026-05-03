@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFavoriteStore } from '../store/favoriteStore';
 import { FaHeart } from 'react-icons/fa'; 
+import BackToTop from '../components/BackToTop';
 
 const FavoritesPage: React.FC = () => {
   const navigate = useNavigate();
@@ -67,6 +68,9 @@ const FavoritesPage: React.FC = () => {
           ))}
         </div>
       )}
+
+      {/* 回到顶部组件 */}
+      <BackToTop />
     </div>
   );
 }

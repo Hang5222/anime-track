@@ -3,6 +3,7 @@ import { useInfiniteQuery } from '@tanstack/react-query'; // 引入 useInfiniteQ
 import { useInView } from 'react-intersection-observer'; // 引入视口雷达 Hook
 import { getTopAnime, searchAnime } from '../api/jikan';
 import AnimeCard from '../components/AnimeCard';
+import BackToTop from '../components/BackToTop';
 import { useSearchParams } from 'react-router-dom';
 
 const HomePage: React.FC = () => {
@@ -148,6 +149,9 @@ const HomePage: React.FC = () => {
           </div>
         </>
       )}
+
+      {/* 回到顶部组件 */}
+      <BackToTop />
     </div>
   );
 };
