@@ -1,3 +1,4 @@
+import React, { memo } from 'react';
 import type { Anime } from '../types/anime';
 import { useNavigate } from 'react-router-dom';
 import { FaHeart, FaRegHeart } from 'react-icons/fa'; 
@@ -8,8 +9,8 @@ interface AnimeCardProps {
   anime: Anime;
 }
 
-// 声明组件并解构出 anime
-const AnimeCard: React.FC<AnimeCardProps> = ({ anime }) => {
+// 使用 React.memo 包裹组件
+const AnimeCard: React.FC<AnimeCardProps> = memo(({ anime }) => {
   const navigate = useNavigate();
   const { isFavorite, addFavorite, removeFavorite } = useFavoriteStore();
   const isFav = isFavorite(anime.mal_id);
@@ -75,6 +76,6 @@ const AnimeCard: React.FC<AnimeCardProps> = ({ anime }) => {
 
     </div>
   );
-};
+});
 
 export default AnimeCard;
