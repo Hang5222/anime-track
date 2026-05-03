@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { useInfiniteQuery } from '@tanstack/react-query'; // 引入 useInfiniteQuery (无限查询)
 import { useInView } from 'react-intersection-observer'; // 引入视口雷达 Hook
+import { useWindowVirtualizer } from '@tanstack/react-virtual'; // 引入虚拟列表 Hook
 import { getTopAnime, searchAnime } from '../api/jikan';
 import AnimeCard from '../components/AnimeCard';
 import BackToTop from '../components/BackToTop';
@@ -74,6 +75,30 @@ const HomePage: React.FC = () => {
     }
   },[inView, hasNextPage, isFetchingNextPage, fetchNextPage]);
 
+  // 将所有页的数据扁平化为一个一维数组，方便虚拟列表计算
+  const allAnimes = data ? data.pages.flatMap((page) => page.data) : [];
+
+  // 获取当前屏幕宽度，用于计算列数
+  const [columns, setColumns] = useState(5);
+  useEffect(() => {
+    const updateColumns = () => {
+      if (window.innerWidth < 640) setColumns(2); // sm 以下 2 列
+      else if (window.innerWidth < 768) setColumns(3); // md 以下 3 列
+      else if (window.innerWidth < 1024) setColumns(4); // lg 以下 4 列
+      else setColumns(5); // 默认 5 列
+    };
+    updateColumns();
+    window.addEventListener('resize', updateColumns);
+    return () => window.removeEventListener('resize', updateColumns);
+  }, []);
+
+  // 虚拟列表配置
+  const virtualizer = useWindowVirtualizer({
+    count: Math.ceil(allAnimes.length / columns), // 总行数
+    estimateSize: () => 380, // 预估每行的高度 (卡片高度 + 间距)
+    overscan: 3, // 屏幕外多渲染 3 行，防止滚动过快白屏
+  });
+
   const executeSearch = () => {
     setSearchQuery(inputValue.trim());
   };
@@ -115,17 +140,43 @@ const HomePage: React.FC = () => {
       {/* 渲染无限列表 */}
       {!isLoading && !isError && (
         <>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-            {/* 因为 data.pages 是一个二维数组，我们需要 map 两层 */}
-            {data?.pages.map((page, pageIndex) => (
-              // 第一层：遍历每一页
-              <React.Fragment key={pageIndex}>
-                {page.data.map((animeItem: any) => (
-                  // 第二层：遍历每一页里的动漫数据
-                  <AnimeCard key={animeItem.mal_id} anime={animeItem} />
-                ))}
-              </React.Fragment>
-            ))}
+          <div 
+            style={{ 
+              height: `${virtualizer.getTotalSize()}px`, 
+              width: '100%', 
+              position: 'relative' 
+            }}
+          >
+            {virtualizer.getVirtualItems().map((virtualRow) => {
+              // 计算当前行包含的卡片索引范围
+              const startIndex = virtualRow.index * columns;
+              const rowItems = allAnimes.slice(startIndex, startIndex + columns);
+
+              return (
+                <div
+                  key={virtualRow.index}
+                  style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: `${virtualRow.size}px`,
+                    transform: `translateY(${virtualRow.start}px)`,
+                  }}
+                  className={`grid gap-6 ${
+                    columns === 2 ? 'grid-cols-2 sm:grid-cols-2' : 
+                    columns === 3 ? 'grid-cols-3 md:grid-cols-3' : 
+                    columns === 4 ? 'grid-cols-4 lg:grid-cols-4' : 'grid-cols-5 lg:grid-cols-5'
+                  }`}
+                >
+                  {rowItems.map((animeItem) => (
+                    <div key={animeItem.mal_id} className="h-full pb-6">
+                      <AnimeCard anime={animeItem} />
+                    </div>
+                  ))}
+                </div>
+              );
+            })}
           </div>
 
           {data?.pages[0].data.length === 0 && (
