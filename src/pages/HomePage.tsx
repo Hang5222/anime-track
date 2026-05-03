@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useInfiniteQuery } from '@tanstack/react-query'; // 引入 useInfiniteQuery (无限查询)
 import { useInView } from 'react-intersection-observer'; // 引入视口雷达 Hook
 import { useWindowVirtualizer } from '@tanstack/react-virtual'; // 引入虚拟列表 Hook
@@ -119,27 +119,47 @@ const HomePage: React.FC = () => {
 
   return (
     <div className="container mx-auto p-4 max-w-7xl">
-      {/* 搜索框区域 (保持不变) */}
-      <div className="mb-8 flex flex-col items-center">
-        <h1 className="text-2xl md:text-3xl lg:text-4xl font-black mb-6 text-black text-center">
-          AnimeTrack 动漫指南
-        </h1>
-        <div className="relative w-full max-w-md flex gap-2">
-          <div className="relative flex-1">
-            <input 
-              type="text" value={inputValue} onChange={(e) => setInputValue(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && executeSearch()}
-              placeholder="英文名搜索 (如: Naruto)"
-              className="w-full px-5 py-3 rounded-xl border-2 border-purple-300 focus:border-purple-500 outline-none text-gray-700 shadow-sm"
-            />
-            {inputValue && <button onClick={clearSearch} className="absolute right-4 top-3 text-gray-400 hover:text-red-500 font-bold">✕</button>}
+      {/* 顶部标题与搜索区域 */}
+      <div className="mb-12 mt-6 flex flex-col items-center">
+        {/* 简约化标题设计 */}
+          <div className="text-center mb-8">
+            <h1 className="text-3xl md:text-5xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-500 mb-3">
+              Anime Track
+            </h1>
+            <p className="text-sm md:text-base text-gray-500 font-medium tracking-wide">
+              探索全球热门动漫与你的专属追番列表
+            </p>
           </div>
-          <button onClick={executeSearch} className="px-6 py-3 bg-purple-600 hover:bg-purple-700 text-white text-lg font-bold rounded-xl shadow-md transition-colors">搜索</button>
+  
+          <div className="relative w-full max-w-xl flex gap-2">
+            <div className="relative flex-1 group">
+              <input 
+                type="text" value={inputValue} onChange={(e) => setInputValue(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && executeSearch()}
+                placeholder="搜索动漫英文名 (如: Naruto)"
+                className="w-full px-6 py-3.5 rounded-2xl border-2 border-transparent bg-white focus:border-purple-300 outline-none text-gray-700 shadow-sm focus:shadow-md focus:shadow-purple-500/10 transition-all duration-300 ring-1 ring-gray-100"
+              />
+              {inputValue && <button onClick={clearSearch} className="absolute right-4 top-3.5 text-gray-400 hover:text-purple-600 p-1 rounded-full hover:bg-purple-50 transition-colors">✕</button>}
+            </div>
+            <button onClick={executeSearch} className="px-8 py-3.5 bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white text-base font-bold rounded-2xl shadow-md hover:shadow-lg hover:shadow-purple-500/30 transition-all duration-300 active:scale-95">
+              搜索
+            </button>
+          </div>
         </div>
-      </div>
 
-      <div className="flex justify-between items-center mb-6 border-b-2 border-purple-100 pb-2">
-        <h2 className="text-sm md:text-lg lg:text-2xl font-bold text-gray-800 border-l-4 border-purple-500 pl-3">
-          {searchQuery ? `"${searchQuery}" 的搜索结果` : '🔥本季霸权排行榜'}
+      {/* 列表标题 */}
+      <div className="flex justify-between items-center mb-8 pb-4 border-b border-gray-100">
+        <h2 className="text-xl md:text-2xl font-bold text-gray-900 flex items-center gap-3">
+          {searchQuery ? (
+            <>
+              <span className="text-gray-400 font-normal">搜索结果 /</span>
+              <span className="text-purple-600">"{searchQuery}"</span>
+            </>
+          ) : (
+            <>
+              <span className="w-1.5 h-6 bg-purple-600 rounded-full inline-block"></span>
+              本季霸权排行榜
+            </>
+          )}
         </h2>
       </div>
 

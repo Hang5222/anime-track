@@ -61,9 +61,10 @@ const DetailPage: React.FC = () => {
         {/* 返回按钮 */}
         <button
           onClick={() => navigate(-1)}
-          className="absolute top-4 left-4 sm:top-6 sm:left-6 text-white bg-black/50 hover:bg-black/80 p-2 sm:p-3 rounded-full backdrop-blur-sm transition-all z-10 flex items-center gap-2 text-sm sm:text-base"
+          className="absolute top-4 left-4 sm:top-6 sm:left-6 text-white bg-black/40 hover:bg-black/70 p-2.5 sm:p-3 rounded-full backdrop-blur-md transition-all duration-300 z-10 flex items-center justify-center group shadow-lg border border-white/10"
+          title="返回"
         >
-          <FaArrowLeft /> 返回
+          <FaArrowLeft className="text-sm sm:text-base group-hover:-translate-x-1 transition-transform" />
         </button>
 
         {/* 覆盖在背景上的主要信息 */}

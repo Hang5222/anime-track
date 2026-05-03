@@ -1,7 +1,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFavoriteStore } from '../store/favoriteStore';
-import { FaHeart } from 'react-icons/fa'; 
+import { FaHeart, FaArrowLeft } from 'react-icons/fa'; 
 import BackToTop from '../components/BackToTop';
 
 const FavoritesPage: React.FC = () => {
@@ -9,12 +9,13 @@ const FavoritesPage: React.FC = () => {
   const { favorites, removeFavorite } = useFavoriteStore();
   return (
     <div className="container mx-auto p-4 max-w-7xl">
-      <div className="flex items-center mb-8">
+      <div className="flex items-center mb-8 gap-4">
         <button 
           onClick={() => navigate(-1)}
-          className="text-sm md:text-lg mr-4 text-purple-600 hover:bg-purple-50 p-2 rounded-full transition-colors" 
+          className="text-gray-500 bg-white hover:text-purple-600 hover:bg-purple-50 p-2.5 sm:p-3 rounded-full transition-all duration-300 shadow-sm border border-gray-100 group" 
+          title="返回"
         >
-          ← 返回
+          <FaArrowLeft className="text-sm sm:text-base group-hover:-translate-x-1 transition-transform" />
         </button>
         <h1 className="text-2xl md:text-3xl font-black text-gray-800">💖我的追番列表</h1> 
       </div>
