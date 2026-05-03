@@ -75,9 +75,19 @@ const DetailPage: React.FC = () => {
             className="w-32 h-44 sm:w-40 sm:h-56 md:w-48 md:h-64 object-cover rounded-xl shadow-2xl border-2 sm:border-4 border-white sm:translate-y-8"
           />
           {/* 右侧标题区 */}
-          <div className="pb-0 sm:pb-4 text-center sm:text-left">
-            <h1 className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white drop-shadow-lg mb-1 sm:mb-2">{anime.title}</h1>
-            <p className="text-sm sm:text-lg md:text-xl text-gray-300 font-medium mb-2 sm:mb-4">{anime.title_japanese}</p>
+          <div className="pb-0 sm:pb-4 text-center sm:text-left w-full sm:w-auto overflow-hidden">
+            <h1 
+              className="text-xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-white drop-shadow-lg mb-1 sm:mb-2 truncate sm:whitespace-normal sm:overflow-visible sm:break-words max-w-full"
+              title={anime.title}
+            >
+              {anime.title}
+            </h1>
+            <p 
+              className="text-sm sm:text-lg md:text-xl text-gray-300 font-medium mb-2 sm:mb-4 truncate sm:whitespace-normal sm:overflow-visible sm:break-words max-w-full"
+              title={anime.title_japanese}
+            >
+              {anime.title_japanese}
+            </p>
             <div className="flex flex-wrap justify-center sm:justify-start gap-2 sm:gap-3">
               <span className="bg-yellow-400 text-yellow-900 px-3 sm:px-4 py-1 rounded-full font-bold shadow-md text-xs sm:text-sm">⭐ {anime.score || 'N/A'}</span>
               <span className="hidden sm:inline-block bg-white/20 text-white backdrop-blur-md px-3 sm:px-4 py-1 rounded-full font-bold border border-white/30 text-xs sm:text-sm">📺 {anime.status}</span>

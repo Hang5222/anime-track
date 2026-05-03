@@ -95,7 +95,16 @@ const HomePage: React.FC = () => {
   // 虚拟列表配置
   const virtualizer = useWindowVirtualizer({
     count: Math.ceil(allAnimes.length / columns), // 总行数
-    estimateSize: () => 380, // 预估每行的高度 (卡片高度 + 间距)
+    estimateSize: () => {
+      // 动态计算响应式预估高度
+      // 容器最大宽度 1280px (max-w-7xl)，左右内边距共 32px (p-4)
+      const containerWidth = Math.min(window.innerWidth, 1280) - 32; 
+      const gapWidth = (columns - 1) * 24; // gap-6 是 24px
+      const cardWidth = (containerWidth - gapWidth) / columns;
+      // 卡片图片是 aspect-3/4 (高度是宽度的 1.33倍)
+      // 下方文字区高度约为 90px，再加行底部的间距 pb-6 (24px)
+      return cardWidth * 1.333 + 114; 
+    },
     overscan: 3, // 屏幕外多渲染 3 行，防止滚动过快白屏
   });
 
@@ -155,12 +164,13 @@ const HomePage: React.FC = () => {
               return (
                 <div
                   key={virtualRow.index}
+                  data-index={virtualRow.index}
+                  ref={virtualizer.measureElement}
                   style={{
                     position: 'absolute',
                     top: 0,
                     left: 0,
                     width: '100%',
-                    height: `${virtualRow.size}px`,
                     transform: `translateY(${virtualRow.start}px)`,
                   }}
                   className={`grid gap-6 ${
