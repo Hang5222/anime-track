@@ -49,7 +49,7 @@ const DetailPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-slate-50 pb-20">
       
-      {/* 🌟 1. 顶部全屏横幅 (Hero Banner) 加高斯模糊背景 */}
+      {/* 顶部全屏横幅 (Hero Banner) 加高斯模糊背景 */}
       <div className="relative w-full h-[300px] sm:h-[350px] md:h-[400px] overflow-hidden bg-black">
         {/* 背景图：放大、变暗、模糊，烘托氛围 */}
         <img
@@ -95,10 +95,10 @@ const DetailPage: React.FC = () => {
         </div>
       </div>
 
-      {/* 🌟 2. 极简下半部分：流式阅读排版 */}
+      {/* 极简下半部分：流式阅读排版 */}
       <div className="max-w-5xl mx-auto px-6 pt-12 pb-20">
         
-        {/* 2.1 基础信息数据条 (Data Bar) - 移出侧边栏，改为横向排列 */}
+        {/* 基础信息数据条 (Data Bar) - 移出侧边栏，改为横向排列 */}
         <div className="flex flex-wrap gap-x-12 gap-y-4 mb-10 pb-6 border-b border-gray-200">
           <div className="flex flex-col">
             <span className="text-xs font-bold text-gray-400 uppercase tracking-wider mb-1">类型</span>
@@ -110,7 +110,7 @@ const DetailPage: React.FC = () => {
           </div>
         </div>
 
-        {/* 2.2 剧情简介 - 占据完整宽度，提升阅读体验 */}
+        {/* 剧情简介 - 占据完整宽度，提升阅读体验 */}
         <div className="mb-16">
           <h2 className="text-xl font-bold text-gray-900 mb-4 tracking-tight">剧情简介</h2>
           {/* 使用 prose 类 (需安装 @tailwindcss/typography 插件，如果没有安装，就用手写排版) */}
@@ -126,7 +126,7 @@ const DetailPage: React.FC = () => {
           </div>
         </div>
 
-        {/* 2.3 角色列表阵列 - 紧凑型极简卡片 */}
+        {/* 角色列表阵列 - 紧凑型极简卡片 */}
         <div>
           <h2 className="text-xl font-bold text-gray-900 mb-6 tracking-tight">主要登场角色</h2>
           <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-4">

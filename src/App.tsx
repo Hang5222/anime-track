@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
-import HomePage from './pages/HomePage';
-import AboutPage from './pages/AboutPage';
-import DetailPage from './pages/DetailPage';
-import FavoritesPage from './pages/FavoritesPage';
 import Navbar from './components/Navbar';
+
+// 路由懒加载
+const HomePage = lazy(() => import('./pages/HomePage'));
+const AboutPage = lazy(() => import('./pages/AboutPage'));
+const DetailPage = lazy(() => import('./pages/DetailPage'));
+const FavoritesPage = lazy(() => import('./pages/FavoritesPage'));
 
 const queryClient = new QueryClient();
 
@@ -19,12 +21,14 @@ const App: React.FC = () => {
           <Navbar />
 
           <main className="mx-auto max-w-7xl px-4 py-8">
-            <Routes>
-              <Route path="/" element={<HomePage />} />
-              <Route path="/anime/:id" element={<DetailPage />} />    {/* :id 占位符 */}
-              <Route path="/favorites" element={<FavoritesPage />} />
-              <Route path="/about" element={<AboutPage />} />
-            </Routes>
+            <Suspense fallback={<div className="flex justify-center items-center h-64 text-purple-600 animate-pulse font-bold">正在加载页面...</div>}>
+              <Routes>
+                <Route path="/" element={<HomePage />} />
+                <Route path="/anime/:id" element={<DetailPage />} />    {/* :id 占位符 */}
+                <Route path="/favorites" element={<FavoritesPage />} />
+                <Route path="/about" element={<AboutPage />} />
+              </Routes>
+            </Suspense>
           </main>
           
         </BrowserRouter>

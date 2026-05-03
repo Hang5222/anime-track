@@ -27,7 +27,7 @@ const FavoritesPage: React.FC = () => {
           </button>
         </div>
       ) : (
-        /* 4. 💡 TODO: 遍历 favorites 数组，渲染收藏卡片 */
+        /* 遍历 favorites 数组，渲染收藏卡片 */
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
           {/* 使用 favorites.map 进行遍历 */}
           {favorites.map((anime) => (
@@ -40,9 +40,8 @@ const FavoritesPage: React.FC = () => {
               >
                 <img src={anime.image_url} alt={anime.title} className="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
                 
-                {/* 🌟 移除收藏的按钮 */}
+                {/* 移除收藏的按钮 */}
                 <button 
-                  // 💡 TODO: 点击时调用 removeFavorite(anime.mal_id) 并阻止事件冒泡！
                   onClick={(e) => {
                     e.stopPropagation();
                     removeFavorite(anime.mal_id);
