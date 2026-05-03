@@ -20,7 +20,7 @@ const AboutPage: React.FC = () => {
 
       {/* 关于内容 */}
       <div className="text-lg bg-white rounded-2xl shadow-sm border border-gray-100 p-8 md:p-12">
-        <h2 className="font-black text-3xl md:text-4xl text-center text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-500 mb-8">Anime Track</h2>
+        <h2 className="font-black text-3xl md:text-4xl text-center text-transparent bg-clip-text bg-linear-to-r from-purple-600 to-pink-500 mb-8">Anime Track</h2>
         <p className="text-center mb-6 text-gray-600 leading-relaxed max-w-2xl mx-auto">
           这是一个基于 <strong className="text-gray-800">React + TypeScript</strong> 开发的动漫跟踪网站，用于搜索、记录和管理用户关注的动漫。
         </p>

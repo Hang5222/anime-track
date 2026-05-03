@@ -15,13 +15,13 @@ const queryClient = new QueryClient();
 const App: React.FC = () => {
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="min-h-screen bg-slate-50 font-sans text-gray-800">
+      <div className="min-h-screen text-gray-800">
         <BrowserRouter>
-          
+
           <Navbar />
 
           <main className="mx-auto max-w-7xl px-4 py-8">
-            <Suspense fallback={<div className="flex justify-center items-center h-64 text-purple-600 animate-pulse font-bold">正在加载页面...</div>}>
+            <Suspense fallback={<div className="flex justify-center items-center h-64 text-pink-500 animate-pulse font-cute text-2xl">正在加载页面... ⭐</div>}>
               <Routes>
                 <Route path="/" element={<HomePage />} />
                 <Route path="/anime/:id" element={<DetailPage />} />    {/* :id 占位符 */}
@@ -30,7 +30,7 @@ const App: React.FC = () => {
               </Routes>
             </Suspense>
           </main>
-          
+
         </BrowserRouter>
       </div>
     </QueryClientProvider>

@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import type { Anime } from '../types/anime';
 import { useNavigate } from 'react-router-dom';
-import { FaHeart, FaRegHeart } from 'react-icons/fa'; 
+import { FaHeart, FaRegHeart, FaStar } from 'react-icons/fa';
 import { useFavoriteStore } from '../store/favoriteStore';
 
 // 定义这个组件的 Props 接口：它必须接收一个属性叫 anime，类型是 Anime
@@ -35,41 +35,43 @@ const AnimeCard: React.FC<AnimeCardProps> = memo(({ anime }) => {
     navigate(`/anime/${anime.mal_id}`);
   }
   return (
-    <div className="group bg-white rounded-xl shadow-sm overflow-hidden border border-gray-100 hover:shadow-xl hover:-translate-y-2 transition-all duration-300 cursor-pointer flex flex-col"
+    <div className="group card-cute overflow-hidden cursor-pointer flex flex-col"
       onClick={handleClick}>
-      
+
       {/* 海报区域 */}
-      <div className="relative aspect-3/4 overflow-hidden bg-gray-200">
-        <img 
-          src={anime.images.webp.large_image_url} 
-          alt={anime.title} 
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" 
+      <div className="relative aspect-3/4 overflow-hidden bg-pink-50">
+        <img
+          src={anime.images.webp.large_image_url}
+          alt={anime.title}
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
         />
-        
-        {/* 评分小标签 */}
-        <div className="absolute top-2 right-2 bg-black/70 backdrop-blur-sm text-white text-xs font-bold px-2 py-1 rounded-md flex items-center gap-1">
-          ⭐ {anime.score}
+
+        {/* 评分小标签 - 可爱风格 */}
+        <div className="absolute top-2 right-2 sm:top-3 sm:right-3 bg-white/95 backdrop-blur-sm text-pink-500 text-[10px] sm:text-xs font-bold px-2 sm:px-2.5 py-1 sm:py-1.5 rounded-full shadow-cute flex items-center gap-1 border border-pink-100">
+          <FaStar className="text-yellow-400" />
+          <span>{anime.score || 'N/A'}</span>
         </div>
-        
-        {/* 爱心收藏按钮区域 */}
-        <button 
+
+        {/* 爱心收藏按钮区域 - 可爱风格 */}
+        <button
           onClick={handleHeartClick}
-          className="absolute top-2 left-2 p-2 rounded-full bg-black/40 backdrop-blur-sm text-white hover:bg-black/60 transition-colors"
+          className="absolute top-2 left-2 sm:top-3 sm:left-3 p-2 sm:p-2.5 rounded-full bg-white/90 backdrop-blur-sm shadow-cute hover:scale-110 transition-all duration-300"
         >
-          {isFav ? <FaHeart className="text-red-500 text-lg" /> : <FaRegHeart className="text-lg" />}
-        </button>  
+          {isFav ? <FaHeart className="text-rose-500 text-sm sm:text-lg" /> : <FaRegHeart className="text-rose-300 text-sm sm:text-lg" />}
+        </button>
       </div>
 
-      {/* 文字信息区域 */}
-      <div className="p-4 flex-1 flex flex-col justify-between">
-        <h3 className="font-bold text-gray-800 text-sm mb-1 truncate" title={anime.title}>
+      {/* 文字信息区域 - 可爱风格 */}
+      <div className="p-2 sm:p-4 flex-1 flex flex-col justify-between bg-white">
+        <h3 className="font-bold text-gray-800 text-xs sm:text-sm mb-1 sm:mb-2 truncate leading-relaxed" title={anime.title}>
           {anime.title}
         </h3>
-        
-        <div className="flex justify-between items-center text-xs text-gray-500 font-medium mt-2">
-          <span>📅 {anime.year || '未知'}</span>
-          <span className="bg-indigo-50 text-indigo-600 px-2 py-1 rounded-full">
-            {anime.episodes ? `${anime.episodes} 集` : '连载中'}
+
+        <div className="flex justify-between items-center text-[10px] sm:text-xs text-gray-500 font-medium gap-1">
+          <span className="tag-cute hidden sm:inline">📅 {anime.year || '未知'}</span>
+          <span className="tag-cute sm:hidden">{anime.year || '?'}</span>
+          <span className="bg-pink-50 text-pink-500 px-2 sm:px-3 py-0.5 sm:py-1 rounded-full border border-pink-200 whitespace-nowrap">
+            {anime.episodes ? `${anime.episodes}集` : '连载'}
           </span>
         </div>
       </div>

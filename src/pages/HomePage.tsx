@@ -119,52 +119,53 @@ const HomePage: React.FC = () => {
 
   return (
     <div className="container mx-auto p-4 max-w-7xl">
-      {/* 顶部标题与搜索区域 */}
-      <div className="mb-12 mt-6 flex flex-col items-center">
-        {/* 简约化标题设计 */}
-          <div className="text-center mb-8">
-            <h1 className="text-3xl md:text-5xl font-black tracking-tight text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-500 mb-3">
-              Anime Track
+      {/* 顶部标题与搜索区域 - 可爱风格 */}
+      <div className="mb-8 sm:mb-12 mt-4 sm:mt-6 flex flex-col items-center px-2 sm:px-0">
+        {/* 可爱风格标题设计 */}
+          <div className="text-center mb-6 sm:mb-8">
+            <h1 className="text-3xl sm:text-4xl md:text-6xl font-cute text-gradient-cute mb-2 sm:mb-3">
+              🌸 Anime Track 🌸
             </h1>
-            <p className="text-sm md:text-base text-gray-500 font-medium tracking-wide">
-              探索全球热门动漫与你的专属追番列表
+            <p className="text-xs sm:text-sm md:text-base text-pink-400 font-medium tracking-wide">
+              探索全球热门动漫与你的专属追番列表 ✨
             </p>
           </div>
-  
-          <div className="relative w-full max-w-xl flex gap-2">
+
+          <div className="relative w-full max-w-xl flex gap-2 sm:gap-3 px-2 sm:px-0">
             <div className="relative flex-1 group">
-              <input 
+              <input
                 type="text" value={inputValue} onChange={(e) => setInputValue(e.target.value)} onKeyDown={(e) => e.key === 'Enter' && executeSearch()}
                 placeholder="搜索动漫英文名 (如: Naruto)"
-                className="w-full px-6 py-3.5 rounded-2xl border-2 border-transparent bg-white focus:border-purple-300 outline-none text-gray-700 shadow-sm focus:shadow-md focus:shadow-purple-500/10 transition-all duration-300 ring-1 ring-gray-100"
+                className="w-full px-4 sm:px-6 py-3 sm:py-4 input-cute text-gray-700 shadow-cute text-sm sm:text-base"
               />
-              {inputValue && <button onClick={clearSearch} className="absolute right-4 top-3.5 text-gray-400 hover:text-purple-600 p-1 rounded-full hover:bg-purple-50 transition-colors">✕</button>}
+              {inputValue && <button onClick={clearSearch} className="absolute right-3 sm:right-4 top-3 sm:top-4 text-pink-300 hover:text-pink-500 p-1 rounded-full hover:bg-pink-50 transition-colors">✕</button>}
             </div>
-            <button onClick={executeSearch} className="px-8 py-3.5 bg-gradient-to-r from-purple-600 to-pink-500 hover:from-purple-700 hover:to-pink-600 text-white text-base font-bold rounded-2xl shadow-md hover:shadow-lg hover:shadow-purple-500/30 transition-all duration-300 active:scale-95">
-              搜索
+            <button onClick={executeSearch} className="px-4 sm:px-8 py-3 sm:py-4 btn-cute active:scale-95 text-sm sm:text-base whitespace-nowrap">
+              🔍 <span className="hidden sm:inline">搜索</span>
             </button>
           </div>
         </div>
 
-      {/* 列表标题 */}
-      <div className="flex justify-between items-center mb-8 pb-4 border-b border-gray-100">
-        <h2 className="text-xl md:text-2xl font-bold text-gray-900 flex items-center gap-3">
+      {/* 列表标题 - 可爱风格 */}
+      <div className="flex justify-between items-center mb-6 sm:mb-8 pb-3 sm:pb-4 border-b-2 border-pink-100 px-2 sm:px-0">
+        <h2 className="text-lg sm:text-xl md:text-2xl font-cute text-gray-800 flex items-center gap-2 sm:gap-3">
           {searchQuery ? (
             <>
-              <span className="text-gray-400 font-normal">搜索结果 /</span>
-              <span className="text-purple-600">"{searchQuery}"</span>
+              <span className="text-pink-300">🔍</span>
+              <span className="text-pink-500 truncate max-w-[120px] sm:max-w-[200px]">"{searchQuery}"</span>
+              <span className="text-gray-400 hidden sm:inline">的搜索结果</span>
             </>
           ) : (
             <>
-              <span className="w-1.5 h-6 bg-purple-600 rounded-full inline-block"></span>
-              本季霸权排行榜
+              <span className="text-xl sm:text-2xl">🔥</span>
+              <span className="text-gradient-cute">本季热门动漫</span>
             </>
           )}
         </h2>
       </div>
 
-      {isLoading && <div className="p-10 text-center text-xl text-purple-600 animate-pulse">正在跨次元解析数据... ⏳</div>}
-      {isError && <div className="p-10 text-center text-red-500 bg-red-50 rounded-xl mb-6">获取数据失败: {(error as Error).message}</div>}
+      {isLoading && <div className="p-10 text-center text-xl text-pink-500 animate-pulse font-cute">正在加载动漫数据... ⭐</div>}
+      {isError && <div className="p-10 text-center text-rose-500 bg-rose-50 rounded-cute mb-6 border-2 border-rose-200">获取数据失败: {(error as Error).message}</div>}
 
       {/* 渲染无限列表 */}
       {!isLoading && !isError && (
@@ -210,22 +211,22 @@ const HomePage: React.FC = () => {
           </div>
 
           {data?.pages[0].data.length === 0 && (
-            <div className="text-center text-gray-500 py-10 bg-gray-50 rounded-xl">
-              没找到相关动漫，换个名字试试吧~ 
+            <div className="text-center text-gray-500 py-10 bg-white rounded-cute border-2 border-pink-100">
+              没找到相关动漫，换个名字试试吧~ 🌸
             </div>
           )}
 
-          {/* 安插底部的“哨兵”！ */}
-          <div 
+          {/* 安插底部的"哨兵"！ */}
+          <div
             ref={ref} // 把雷达绑在它身上
             className="w-full py-10 flex justify-center items-center"
           >
             {isFetchingNextPage ? (
-               <span className="text-purple-500 animate-pulse font-bold">📡 正在查询更多动漫...</span>
+               <span className="text-pink-500 animate-pulse font-cute text-lg">正在加载更多动漫... ⭐</span>
             ) : hasNextPage ? (
-               <span className="text-gray-400">继续滑动加载更多</span>
+               <span className="text-pink-300 font-cute">继续滑动加载更多 ✨</span>
             ) : (
-               <span className="text-gray-400 font-bold">🎉 已经是所有的动漫啦！</span>
+               <span className="text-pink-400 font-cute text-lg">🎉 已经是所有的动漫啦！</span>
             )}
           </div>
         </>

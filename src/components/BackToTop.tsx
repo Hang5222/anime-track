@@ -33,11 +33,11 @@ const BackToTop: React.FC = () => {
       {isVisible && (
         <button
           onClick={scrollToTop}
-          className="fixed bottom-8 right-8 p-3 rounded-full bg-purple-600 text-white shadow-lg hover:bg-purple-700 hover:scale-110 transition-all duration-300 z-50 flex items-center justify-center"
+          className="fixed bottom-6 right-6 sm:bottom-8 sm:right-8 p-3 sm:p-4 rounded-full bg-linear-to-r from-pink-400 to-rose-400 text-white shadow-cute hover:shadow-cute-hover hover:scale-110 transition-all duration-300 z-50 flex items-center justify-center border-2 border-white"
           aria-label="回到顶部"
           title="回到顶部"
         >
-          <FaArrowUp className="text-xl" />
+          <FaArrowUp className="text-lg sm:text-xl" />
         </button>
       )}
     </>
