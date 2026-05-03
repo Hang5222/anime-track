@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { getFullAnimeInfo } from '../api/jikan';
@@ -9,6 +9,11 @@ const DetailPage: React.FC = () => {
   const { id } = useParams(); // 操作 URL 参数的 HOOK
   const navigate = useNavigate();
   const { isFavorite, addFavorite, removeFavorite } = useFavoriteStore();
+
+  // 进入详情页时滚动到顶部
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [id]);
 
   const { data, isLoading, isError, error } = useQuery({
     queryKey: ['animeFullDetail', id],
