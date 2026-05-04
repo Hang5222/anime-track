@@ -233,7 +233,7 @@ const HomePage: React.FC = () => {
       )}
 
       {/* 回到顶部组件 */}
-      <BackToTop />
+      <BackToTop onScrollToTop={() => virtualizer.scrollToOffset(0, { behavior: 'smooth' })} />
     </div>
   );
 };

@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { FaArrowUp } from 'react-icons/fa';
 
-const BackToTop: React.FC = () => {
+interface BackToTopProps {
+  onScrollToTop?: () => void;
+}
+
+const BackToTop: React.FC<BackToTopProps> = ({ onScrollToTop }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   // 监听滚动事件，判断是否显示按钮
@@ -22,10 +26,16 @@ const BackToTop: React.FC = () => {
 
   // 滚动到顶部
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
+    if (onScrollToTop) {
+      // 使用外部传入的滚动函数（虚拟列表的 scrollToOffset）
+      onScrollToTop();
+    } else {
+      // 兜底方案：使用原生滚动
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+    }
   };
 
   return (

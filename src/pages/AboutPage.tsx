@@ -22,7 +22,7 @@ const AboutPage: React.FC = () => {
     '搜索关键词同步 URL，支持分享',
     '收藏状态本地持久化',
     '全端响应式适配',
-    '更多请见Github仓库README ...',
+    '更多详情请见Github仓库README ...',
   ];
 
   return (
