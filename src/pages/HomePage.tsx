@@ -55,10 +55,10 @@ const HomePage: React.FC = () => {
     },
 
     // 修复重回主页的429报错：
-    // 数据在 5 分钟内保持新鲜，不会自动重新请求
-    staleTime: 1000 * 60 * 5,
-    // 缓存数据在 10 分钟内保留，即使组件卸载
-    gcTime: 1000 * 60 * 10,
+    // 数据在 30 分钟内保持新鲜，不会自动重新请求（排行榜的数据不经常变化，所以可以设置的久一些）
+    staleTime: 1000 * 60 * 30,
+    // 缓存数据在 1 小时内保留，即使组件卸载
+    gcTime: 1000 * 60 * 60 * 1,
     // 窗口重新聚焦时不自动刷新
     refetchOnWindowFocus: false,
     // 网络重连时不自动刷新
@@ -127,7 +127,7 @@ const HomePage: React.FC = () => {
               🌸 Anime Track 🌸
             </h1>
             <p className="text-xs sm:text-sm md:text-base text-pink-400 font-medium tracking-wide">
-              探索全球热门动漫与你的专属追番列表 ✨
+              探索全球热门动漫 ✨构建你的专属追番列表 
             </p>
           </div>
 

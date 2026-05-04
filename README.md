@@ -1,73 +1,51 @@
-# React + TypeScript + Vite
+# AnimeTrack
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+基于 React + TypeScript 开发的动漫浏览搜索与收藏管理网站。
 
-Currently, two official plugins are available:
+本项目涵盖动漫搜索浏览、详情展示、收藏管理等核心功能，并针对大数据列表做了渲染性能优化。
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 核心特性
 
-## React Compiler
+### 首页：动漫浏览与搜索
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+*   **虚拟列表渲染**：基于 TanStack Virtual 实现窗口级虚拟化，只渲染可视区域内的卡片节点，解决大量 DOM 节点导致的页面卡顿问题。配合动态行高计算（根据屏幕宽度自适应 2-5 列布局），实现万级数据流畅滚动。
+*   **无限滚动加载**：结合 `react-intersection-observer` 与 React Query (TanStack Query) 的 `useInfiniteQuery`，当滚动到底部哨兵元素进入视口时自动触发下一页请求，拼接分页数据形成无缝浏览体验。
+*   **搜索功能**：支持按动漫英文名实时搜索，搜索关键词通过 `useSearchParams` 同步到 URL Query 参数，刷新页面或分享链接后可保留搜索状态。搜索时清空已有列表并重新发起无限查询，配合 React Query 的 `queryKey` 自动切换数据源。
 
-## Expanding the ESLint configuration
+### 详情页：动漫信息展示
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+*   **聚合数据请求**：使用 `Promise.all` 并发请求动漫详情与角色列表接口，减少串行等待时间，拼装后统一返回给组件渲染。
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### 收藏功能
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+*   **状态持久化**：基于 Zustand + persist 中间件实现收藏状态的本地存储，页面刷新后收藏数据不丢失。
+*   **跨页面状态同步**：收藏按钮在首页卡片、详情页、收藏列表页均可操作，状态通过 Zustand 全局共享，一处变更处处同步。
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### 性能与体验优化
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+*   **React Query 缓存策略**：配置 `staleTime` `gcTime` `refetchOnMount` 等参数，避免页面切换时的大量重复请求；窗口失焦/重连时不自动刷新，减少不必要的网络开销。
+*   **响应式适配**：从移动端到桌面端的全端适配，导航栏、搜索区、卡片网格、详情页布局均针对不同屏幕尺寸做了差异化处理。
+*   **路由懒加载**：使用 `React.lazy` + `Suspense` 对页面组件进行代码分割，减少首屏加载体积。
+*   **动漫卡片 memo 包裹**：对 AnimeCard 组件进行 memo 包裹，避免每次输入框打字时卡片都重复渲染，提高性能。
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## 技术栈
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+*   **核心框架**：React
+*   **主要开发语言**：TypeScript
+*   **构建工具**：Vite
+*   **路由管理**：React Router DOM 
+*   **服务端状态管理**：React Query (TanStack Query)
+*   **客户端状态管理**：Zustand
+*   **虚拟列表**：TanStack Virtual 
+*   **UI 样式**：Tailwind CSS 
+*   **网络请求**：Axios
+*   **图标**：React Icons
+
+## 开发中遇到的问题
+
+*   **页面切换后滚动位置残留**：从主页滚动到底部后进入详情页，页面仍停留在底部。解决方案是在详情页组件挂载时调用 `window.scrollTo(0, 0)` 强制回到顶部。
+*   **React Query 默认缓存导致重复请求**：当主页向下滑动加载了很多动漫时，从详情页再返回主页时，会直接出现429报错。经网络抓包调试，发现每次回主页都会重新发送所有主页已经加载的动漫数据，大量请求导致 API 429 限流。随后我便查询 React Query 的 SWR 原理以及缓存策略。明白了staleTime的默认值为0，意味着默认数据新鲜时间为0，每次回到主页后台都会默默发送全部请求去验证。我的解决方案是配置 `staleTime`、`gcTime`、`refetchOnWindowFocus`、`refetchOnMount` 等参数，控制缓存失效与重新获取的时机。
+
+## 数据来源
+
+[Jikan API](https://jikan.moe/)
