@@ -12,7 +12,7 @@ const FavoritesPage: React.FC = () => {
       <div className="flex items-center mb-8 gap-4">
         <button 
           onClick={() => navigate(-1)}
-          className="text-gray-500 bg-white hover:text-purple-600 hover:bg-purple-50 p-2.5 sm:p-3 rounded-full transition-all duration-300 shadow-sm border border-gray-100 group" 
+          className="text-gray-500 bg-white hover:text-pink-500 hover:bg-pink-50 p-2.5 sm:p-3 rounded-full transition-all duration-300 shadow-sm border border-gray-100 group" 
           title="返回"
         >
           <FaArrowLeft className="text-sm sm:text-base group-hover:-translate-x-1 transition-transform" />
@@ -23,7 +23,7 @@ const FavoritesPage: React.FC = () => {
       {favorites.length === 0 ? (
         <div className="text-center py-20 text-gray-500 bg-gray-50 rounded-2xl">
           <p className="text-xl mb-4">你的追番列表空空如也~</p>
-          <button onClick={() => navigate('/')} className="text-purple-600 font-bold hover:underline">
+          <button onClick={() => navigate('/')} className="text-pink-500 font-bold hover:underline">
             去首页逛逛吧
           </button>
         </div>

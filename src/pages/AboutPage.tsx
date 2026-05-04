@@ -31,7 +31,7 @@ const AboutPage: React.FC = () => {
       <div className="flex items-center mb-8 gap-4">
         <button
           onClick={() => navigate(-1)}
-          className="text-gray-500 bg-white hover:text-purple-600 hover:bg-purple-50 p-2.5 sm:p-3 rounded-full transition-all duration-300 shadow-sm border border-gray-100 group"
+          className="text-gray-500 bg-white hover:text-pink-500 hover:bg-pink-50 p-2.5 sm:p-3 rounded-full transition-all duration-300 shadow-sm border border-gray-100 group"
           title="返回"
         >
           <FaArrowLeft className="text-sm sm:text-base group-hover:-translate-x-1 transition-transform" />
