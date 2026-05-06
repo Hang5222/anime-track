@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaArrowLeft, FaGithub, FaExternalLinkAlt } from 'react-icons/fa';
 
 const AboutPage: React.FC = () => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   const techStack = [
     { name: 'React', desc: '核心框架' },

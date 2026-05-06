@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useFavoriteStore } from '../store/favoriteStore';
 import { FaHeart, FaArrowLeft } from 'react-icons/fa'; 
@@ -7,6 +7,11 @@ import BackToTop from '../components/BackToTop';
 const FavoritesPage: React.FC = () => {
   const navigate = useNavigate();
   const { favorites, removeFavorite } = useFavoriteStore();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="container mx-auto p-4 max-w-7xl">
       <div className="flex items-center mb-8 gap-4">
